@@ -1,0 +1,30 @@
+name: My First CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-project:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Repository
+        uses: actions/checkout@v4
+
+      - name: Show files
+        run: ls -la
+
+      - name: Verify index.html exists
+        run: test -f index.html
+
+      - name: Install HTMLHint
+        run: npm install -g htmlhint
+
+      - name: Lint HTML
+        run: htmlhint index.html
+
+
+      - name: Print Success Message
+        run: echo "CI Pipeline Passed!"
